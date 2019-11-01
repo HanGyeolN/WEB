@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="text-center">DETAIL</h1>
+    <h2>{{ movie.pk }}번째 영화</h2>
+    <hr>
+    <p>제목: {{ movie.title }}</p>
+    <p>영어 제목: {{ movie.title_en }}</p>
+    <p>관객 인원: {{ movie.audience }}</p>
+    <p>개봉 날짜: {{ movie.open_date|date:"SHORT_DATE_FORMAT" }}</p>
+    <p>장르: {{movie.genre }}</p>
+    <p>관람 등급: {{ movie.watch_grade }}</p>
+    <p>영화 평점: {{ movie.score }}</p>
+    <img src={{movie.poster_url}} alt="">
+    <p>{{ movie.description }}</p>
+    
+    <hr>
+    <a href="../">[목록]</a>   
+    <a href="{% url 'recommend:update' movie.pk %}">[수정]</a>   
+    <form action="{% url 'recommend:delete' movie.pk %}" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="[삭제]">
+    </form>
+{% endblock %}
