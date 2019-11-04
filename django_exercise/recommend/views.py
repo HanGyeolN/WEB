@@ -34,10 +34,10 @@ def create(request):
                                      description = description)
 
         
-        return redirect('../')
+        return redirect('recommend:index')
     
     else:
-        return render(request, 'recommend/new.html')
+        return render(request, 'recommend/create.html')
 
 def detail(request, pk):
     movie = Movie.objects.get(pk=pk)
@@ -49,10 +49,10 @@ def detail(request, pk):
 def update(request, pk):
     movie = Movie.objects.get(pk=pk)
     if request.method == "POST":
-        title = request.POST.get("title")
-        title_en = request.POST.get("title_en")
-        audience = request.POST.get("audience")
-        open_date = request.POST.get("open_date")
+        title = request.POST.get("title") or movie.title
+        title_en = request.POST.get("title_en") or movie.title_en
+        audience = request.POST.get("audience") or movie.audience
+        open_date = request.POST.get("open_date") 
         genre = request.POST.get("genre")
         watch_grade = request.POST.get("watch_grade")
         score = request.POST.get("score")
